@@ -42,9 +42,10 @@ Node* NewNode(PC value) {
 Stack* NewStack(PC firstValue) {
     Stack* stack;
     Node* first = NewNode(firstValue);
-    printf("a");
+
+    // La ejecucion termina aqui
     stack->begin = first;
-    printf("a");
+
     return stack;
 }
 
