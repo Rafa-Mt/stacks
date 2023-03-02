@@ -1,3 +1,6 @@
+// Estructuras Dinamicas de Datos: Pilas
+// Rafael Mata, José Carrillo, Marlon Urdaneta, Tomás Santana, Juan Gil
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -88,10 +91,10 @@ PC printInfo(PC n) {
         "\t Video Card: \t %s\n"        
         "\t Launch Year: \t %i \n"        
         "\t Storage: \t %i GiB %s \n"        
-        "\t It's%s a Laptop\n"
+        "\t It's a %s \n"
         "----------------------------------------------\n"
         , n.brand, n.cpu, n.ram, n.videoCard, n.launchYear
-        , n.storage, n.storageType, n.isLaptop ? "" : " not"
+        , n.storage, n.storageType, n.isLaptop ? "Laptop" : "Desktop PC"
         );
     return n;
 }
