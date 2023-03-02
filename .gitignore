@@ -1,0 +1,5 @@
+# ejecutables
+*.exe
+# vscode config
+.vscode
+*.json

@@ -40,13 +40,13 @@ Node* NewNode(PC value) {
 }
 
 Stack* NewStack(PC firstValue) {
-    Stack* stack;
-    Node* first = NewNode(firstValue);
+    Stack* new = NULL;
+    new = (Stack*)malloc(sizeof(Stack));
 
-    // La ejecucion termina aqui
-    stack->begin = first;
-
-    return stack;
+    if (new != NULL) {
+        new->begin = NewNode(firstValue);
+    }
+    return new;
 }
 
 void push(Stack* stack, PC value) {
@@ -65,10 +65,9 @@ void pop(Stack* stack) {
 
 void iterateStack(Stack* stack, PC (*function)(PC)) {
     Node* actual = stack->begin;
-    while (actual->next != NULL) {
-        function(actual->content);
+    while (actual != NULL) {
+        (*function)(actual->content);
         actual = actual->next;
-        printf("a");
     }
 }
 
@@ -83,16 +82,16 @@ int itemExist(Stack* stack, char name[]) {
 PC printInfo(PC n) {
     printf(
         "----------------------------------------------\n"
-        "\t Brand: \t\t %s \n"
+        "\t Brand: \t %s \n"
         "\t CPU: \t\t %s \n"
         "\t RAM: \t\t %i GiB\n"
-        "\t Video Card: \t\t %s\n"        
-        "\t Launch Year: \t\t %i \n"        
-        "\t Storage: \t\t %s GiB %s \n"        
-        "\t Is %s a Laptop\n"
+        "\t Video Card: \t %s\n"        
+        "\t Launch Year: \t %i \n"        
+        "\t Storage: \t %i GiB %s \n"        
+        "\t It's%s a Laptop\n"
         "----------------------------------------------\n"
         , n.brand, n.cpu, n.ram, n.videoCard, n.launchYear
-        , n.storage, n.storageType, n.isLaptop ? "" : "not"
+        , n.storage, n.storageType, n.isLaptop ? "" : " not"
         );
     return n;
 }
@@ -105,7 +104,6 @@ int main() {
     push(stack, dummy2);
 
     iterateStack(stack, &printInfo);
-    printf("tommy estuvo aqui\n");
 
     return 0;
 }
