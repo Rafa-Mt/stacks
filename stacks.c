@@ -66,7 +66,7 @@ void pop(Stack* stack) {
 void iterateStack(Stack* stack, PC (*function)(PC)) {
     Node* actual = stack->begin;
     while (actual != NULL) {
-        function(actual->content);
+        (*function)(actual->content);
         actual = actual->next;
     }
 }
