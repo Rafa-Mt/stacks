@@ -85,6 +85,7 @@ int itemExist(Stack* stack, char name[]) {
 PC printInfo(PC n) {
     printf(
         "----------------------------------------------\n"
+        "\t Name: \t\t %s \n"
         "\t Brand: \t %s \n"
         "\t CPU: \t\t %s \n"
         "\t RAM: \t\t %i GiB\n"
@@ -93,7 +94,7 @@ PC printInfo(PC n) {
         "\t Storage: \t %i GiB %s \n"        
         "\t It's a %s \n"
         "----------------------------------------------\n"
-        , n.brand, n.cpu, n.ram, n.videoCard, n.launchYear
+        ,n.name, n.brand, n.cpu, n.ram, n.videoCard, n.launchYear
         , n.storage, n.storageType, n.isLaptop ? "Laptop" : "Desktop PC"
         );
     return n;
@@ -101,12 +102,18 @@ PC printInfo(PC n) {
 
 int main() {
     PC dummy1 = {"ThinkPad E560", "Lenovo", "Intel Core i5-6200U", "Intel Skylate", 2015, 8, 1024, "SSD Sata", true};
-    PC dummy2 = {"Inspiron 7465", "Dell", "AMD Ryzen 7 5700U", "AMD Radeon", 2020, 16, 512, "SSD NVMe", true};
+    PC dummy2 = {"Inspiron 7465", "Dell", "AMD Ryzen 7 5700U", "AMD Radeon GX 450", 2020, 16, 512, "SSD NVMe", true};
+    PC dummy3 = {"NZXT Build", "Custom Build", "Intel Core i9-12900k", "NVIDIA RTX 3090 Founders Edition", 2022, 32, 4096, "SSD  NVMe M.2", false};
 
     Stack* stack = NewStack(dummy1);
     push(stack, dummy2);
+    push(stack, dummy3);
 
     iterateStack(stack, &printInfo);
 
+    printf("\nAfter deleting a record\n\n");
+    pop(stack);
+
+    iterateStack(stack, &printInfo);
     return 0;
 }
