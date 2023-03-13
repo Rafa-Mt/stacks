@@ -77,7 +77,8 @@ void iterateStack(Stack* stack, PC (*function)(PC)) {
 int itemExist(Stack* stack, char name[]) {
     Node* actual = stack->begin;
     while (actual != NULL) {
-        if (!strcmp(actual->content.name, name)) return 1; 
+        if (!strcmp(actual->content.name, name)) return 1;
+        actual = actual->next; 
     }
     return 0;
 }
@@ -104,16 +105,27 @@ int main() {
     PC dummy1 = {"ThinkPad E560", "Lenovo", "Intel Core i5-6200U", "Intel Skylate", 2015, 8, 1024, "SSD Sata", true};
     PC dummy2 = {"Inspiron 7465", "Dell", "AMD Ryzen 7 5700U", "AMD Radeon GX 450", 2020, 16, 512, "SSD NVMe", true};
     PC dummy3 = {"NZXT Build", "Custom Build", "Intel Core i9-12900k", "NVIDIA RTX 3090 Founders Edition", 2022, 32, 4096, "SSD  NVMe M.2", false};
-
+    //creando el stack
     Stack* stack = NewStack(dummy1);
+    printf("Stack created using NewStack(). Showing content:\n\n");
+    iterateStack(stack, &printInfo);
+
+    printf("Added two new nodes using push(). Showing content:\n\n");
     push(stack, dummy2);
     push(stack, dummy3);
-
     iterateStack(stack, &printInfo);
 
-    printf("\nAfter deleting a record\n\n");
+
+    printf("\nDeleted a node with pop(). Showing content:\n\n");
     pop(stack);
-
     iterateStack(stack, &printInfo);
+
+    printf("Searching for a PC with name \"ThinkPad E560\"...\n");
+    if (itemExist(stack, "ThinkPad E560")) printf("Found it!\n");
+    else printf("It doesn't exist\n");
+
+    printf("Searching for a PC with name \"MacBook Pro\"...\n");
+    if (itemExist(stack, "MacBook Pro")) printf("Found it!\n");
+    else printf("It doesn't exist\n");
     return 0;
 }
